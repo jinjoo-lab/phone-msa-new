@@ -1,0 +1,76 @@
+name: github-action
+run-name: ${{ github.actor }} is out building GitHub Actions
+
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '**' 
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build Maven Projects
+        run: |
+          mvn clean package -f ./window/pom.xml
+          mvn clean package -f ./work/pom.xml
+          mvn clean package -f ./email/pom.xml
+          mvn clean package -f ./customer/pom.xml
+
+      - name: Docker Build and push for Window
+        uses: docker/build-push-action@v4
+        with:
+          context: ./window
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/window:latest
+            ghcr.io/${{ github.repository }}/window:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Work
+        uses: docker/build-push-action@v4
+        with:
+          context: ./work
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/work:latest
+            ghcr.io/${{ github.repository }}/work:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Email
+        uses: docker/build-push-action@v4
+        with:
+          context: ./email
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/email:latest
+            ghcr.io/${{ github.repository }}/email:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Customer
+        uses: docker/build-push-action@v4
+        with:
+          context: ./customer
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/customer:latest
+            ghcr.io/${{ github.repository }}/customer:${{ github.ref_name }}
+            
