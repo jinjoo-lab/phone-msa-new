@@ -13,9 +13,8 @@ import lombok.Data;
 public class MyPage {
 
     @Id
-    //@GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-
     private Long userId;
     private Long windowId;
     private Long workId;
