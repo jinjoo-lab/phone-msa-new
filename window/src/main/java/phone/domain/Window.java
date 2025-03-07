@@ -41,11 +41,15 @@ public class Window {
 
     @PostUpdate
     public void onPostUpdate() {
-        DataDeleteRequested dataDeleteRequested = new DataDeleteRequested(this);
-        dataDeleteRequested.publishAfterCommit();
+        if(this.serviceType.equals("DATA_DELETE")) {
+            DataDeleteRequested dataDeleteRequested = new DataDeleteRequested(this);
+            dataDeleteRequested.publishAfterCommit();
+        }
 
-        LockRequested lockRequested = new LockRequested(this);
-        lockRequested.publishAfterCommit();
+        if(this.serviceType.equals("LOCK_REQUEST")) {
+            LockRequested lockRequested = new LockRequested(this);
+            lockRequested.publishAfterCommit();
+        }
     }
 
     @PostRemove

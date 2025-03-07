@@ -40,117 +40,63 @@ public class Email {
 
     //<<< Clean Arch / Port Method
     public static void lostMailSend(LostReported lostReported) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Email email = new Email();
-        repository().save(email);
-
-        LostMailSent lostMailSent = new LostMailSent(email);
-        lostMailSent.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(lostReported.get???()).ifPresent(email->{
-            
-            email // do something
-            repository().save(email);
-
-            LostMailSent lostMailSent = new LostMailSent(email);
-            lostMailSent.publishAfterCommit();
-
-         });
-        */
 
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void serviceMailSend(LocationSearched locationSearched) {
-        //implement business logic here:
+        System.out.println("serviceMailSend : LOCATION SEARCHED");
 
-        /** Example 1:  new item 
         Email email = new Email();
-        repository().save(email);
+        email.userId = locationSearched.getUserId();
+        email.phoneNumber = locationSearched.getPhoneNumber();
+        email.title = "[Location Searched]";
+        email.content = "We find your Phone Location !";
+        email.date = locationSearched.getDoneTime();
 
-        ServiceMailSent serviceMailSent = new ServiceMailSent(email);
+        Email consistentEmail = repository().save(email);
+
+        ServiceMailSent serviceMailSent = new ServiceMailSent(consistentEmail);
         serviceMailSent.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(locationSearched.get???()).ifPresent(email->{
-            
-            email // do something
-            repository().save(email);
-
-            ServiceMailSent serviceMailSent = new ServiceMailSent(email);
-            serviceMailSent.publishAfterCommit();
-
-         });
-        */
-
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void serviceMailSend(RemoteLocked remoteLocked) {
         //implement business logic here:
+        System.out.println("serviceMailSend : REMOTE LOCKED");
 
-        /** Example 1:  new item 
         Email email = new Email();
-        repository().save(email);
+        email.userId = remoteLocked.getUserId();
+        email.phoneNumber = remoteLocked.getPhoneNumber();
+        email.title = "[REMOTE LOCKED]";
+        email.content = "Your Phone Remote Locked !";
+        email.date = remoteLocked.getDoneTime();
 
-        ServiceMailSent serviceMailSent = new ServiceMailSent(email);
+        Email consistentEmail = repository().save(email);
+
+        ServiceMailSent serviceMailSent = new ServiceMailSent(consistentEmail);
         serviceMailSent.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(remoteLocked.get???()).ifPresent(email->{
-            
-            email // do something
-            repository().save(email);
-
-            ServiceMailSent serviceMailSent = new ServiceMailSent(email);
-            serviceMailSent.publishAfterCommit();
-
-         });
-        */
-
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void serviceMailSend(DataDeleted dataDeleted) {
         //implement business logic here:
+        System.out.println("serviceMailSend : DATA DELETED");
 
-        /** Example 1:  new item 
         Email email = new Email();
-        repository().save(email);
+        email.userId = dataDeleted.getUserId();
+        email.phoneNumber = dataDeleted.getPhoneNumber();
+        email.title = "[DATA DELETED]";
+        email.content = "Your Data Deleted !";
+        email.date = dataDeleted.getDoneTime();
 
-        ServiceMailSent serviceMailSent = new ServiceMailSent(email);
+        Email consistentEmail = repository().save(email);
+
+        ServiceMailSent serviceMailSent = new ServiceMailSent(consistentEmail);
         serviceMailSent.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(dataDeleted.get???()).ifPresent(email->{
-            
-            email // do something
-            repository().save(email);
-
-            ServiceMailSent serviceMailSent = new ServiceMailSent(email);
-            serviceMailSent.publishAfterCommit();
-
-         });
-        */
-
     }
     //>>> Clean Arch / Port Method
 

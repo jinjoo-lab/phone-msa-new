@@ -44,87 +44,57 @@ public class Work {
     //<<< Clean Arch / Port Method
     public static void remoteLock(LockRequested lockRequested) {
         //implement business logic here:
-
-        /** Example 1:  new item 
+        System.out.println("Lock Requested");
         Work work = new Work();
-        repository().save(work);
+        work.userId = lockRequested.getUserId();
+        work.windowId = lockRequested.getId();
+        work.phoneNumber = lockRequested.getPhoneNumber();
+        work.serviceType = lockRequested.getServiceType();
+        work.isDone = true;
+        work.doneTime = lockRequested.getDate();
 
-        RemoteLocked remoteLocked = new RemoteLocked(work);
+        Work consistentWork = repository().save(work);
+
+        RemoteLocked remoteLocked = new RemoteLocked(consistentWork);
         remoteLocked.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(lockRequested.get???()).ifPresent(work->{
-            
-            work // do something
-            repository().save(work);
-
-            RemoteLocked remoteLocked = new RemoteLocked(work);
-            remoteLocked.publishAfterCommit();
-
-         });
-        */
-
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void locationSearch(LostReported lostReported) {
         //implement business logic here:
-
-        /** Example 1:  new item 
+        System.out.println("Location Searched");
         Work work = new Work();
-        repository().save(work);
+        work.userId = lostReported.getUserId();
+        work.windowId = lostReported.getId();
+        work.phoneNumber = lostReported.getPhoneNumber();
+        work.serviceType = lostReported.getServiceType();
+        work.isDone = true;
+        work.doneTime = lostReported.getDate();
 
-        LocationSearched locationSearched = new LocationSearched(work);
+        Work consistentWork = repository().save(work);
+
+        LocationSearched locationSearched = new LocationSearched(consistentWork);
         locationSearched.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(lostReported.get???()).ifPresent(work->{
-            
-            work // do something
-            repository().save(work);
-
-            LocationSearched locationSearched = new LocationSearched(work);
-            locationSearched.publishAfterCommit();
-
-         });
-        */
-
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void dataDelete(DataDeleteRequested dataDeleteRequested) {
         //implement business logic here:
-
-        /** Example 1:  new item 
+        System.out.println("Data delete requested");
         Work work = new Work();
-        repository().save(work);
+        work.userId = dataDeleteRequested.getUserId();
+        work.windowId = dataDeleteRequested.getId();
+        work.phoneNumber = dataDeleteRequested.getPhoneNumber();
+        work.serviceType = dataDeleteRequested.getServiceType();
+        work.isDone = true;
+        work.doneTime = dataDeleteRequested.getDate();
 
-        DataDeleted dataDeleted = new DataDeleted(work);
+        Work consistentWork = repository().save(work);
+
+        DataDeleted dataDeleted = new DataDeleted(consistentWork);
         dataDeleted.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(dataDeleteRequested.get???()).ifPresent(work->{
-            
-            work // do something
-            repository().save(work);
-
-            DataDeleted dataDeleted = new DataDeleted(work);
-            dataDeleted.publishAfterCommit();
-
-         });
-        */
-
     }
     //>>> Clean Arch / Port Method
 
